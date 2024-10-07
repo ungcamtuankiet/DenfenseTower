@@ -7,7 +7,9 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] titlePrefeabs;
-
+    
+    [SerializeField]
+    private CameraMovement cameraMovement;
     public float TitleSize
     {
         get { return titlePrefeabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
@@ -31,6 +33,8 @@ public class LevelManager : MonoBehaviour
         int mapX = mapData[0].ToCharArray().Length;
 
         int mapY = mapData.Length;
+        
+        Vector3 maxTile = Vector3.zero;
 
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height));
         for (int y = 0; y < mapY; y++)
@@ -38,16 +42,20 @@ public class LevelManager : MonoBehaviour
             char[] newTitles = mapData[y].ToCharArray();
             for (int x = 0; x < mapX; x++)
             {
-                PlaceTitle(newTitles[x].ToString(), x, y, worldStart);
+                maxTile = PlaceTitle(newTitles[x].ToString(), x, y, worldStart);
             }
         }
+        
+        cameraMovement.SetLimits(new Vector3(maxTile.x + TitleSize, maxTile.y - TitleSize));
     }
 
-    private void PlaceTitle(string titleType, int x, int y, Vector3 worldStart)
+    private Vector3 PlaceTitle(string titleType, int x, int y, Vector3 worldStart)
     {
         int tileIndex = int.Parse(titleType);
         GameObject newTitle = Instantiate(titlePrefeabs[tileIndex]);
         newTitle.transform.position = new Vector3(worldStart.x + (TitleSize * x), worldStart.y - (TitleSize * y), 0);
+        
+        return newTitle.transform.position;
     }
 
     private string[] ReadLevelText()
