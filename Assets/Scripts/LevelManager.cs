@@ -52,8 +52,9 @@ public class LevelManager : MonoBehaviour
     private Vector3 PlaceTitle(string titleType, int x, int y, Vector3 worldStart)
     {
         int tileIndex = int.Parse(titleType);
-        GameObject newTitle = Instantiate(titlePrefeabs[tileIndex]);
-        newTitle.transform.position = new Vector3(worldStart.x + (TitleSize * x), worldStart.y - (TitleSize * y), 0);
+        TileScript newTitle = Instantiate(titlePrefeabs[tileIndex]).GetComponent<TileScript>();
+        
+        newTitle.Setup(new Point(x, y), new Vector3(worldStart.x + (TitleSize * x), worldStart.y - (TitleSize * y), 0));
         
         return newTitle.transform.position;
     }
