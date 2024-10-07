@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     
     [SerializeField]
     private CameraMovement cameraMovement;
+    
+    public Dictionary<Point, TileScript> Tiles {get; set;}
     public float TitleSize
     {
         get { return titlePrefeabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
@@ -28,6 +30,8 @@ public class LevelManager : MonoBehaviour
 
     private void CreateLevel()
     {
+        Tiles = new Dictionary<Point, TileScript>();
+        
         string[] mapData = ReadLevelText();
 
         int mapX = mapData[0].ToCharArray().Length;
@@ -42,21 +46,23 @@ public class LevelManager : MonoBehaviour
             char[] newTitles = mapData[y].ToCharArray();
             for (int x = 0; x < mapX; x++)
             {
-                maxTile = PlaceTitle(newTitles[x].ToString(), x, y, worldStart);
+                PlaceTitle(newTitles[x].ToString(), x, y, worldStart);
             }
         }
+        
+        maxTile = Tiles[new Point(mapX - 1, mapY - 1)].transform.position;
         
         cameraMovement.SetLimits(new Vector3(maxTile.x + TitleSize, maxTile.y - TitleSize));
     }
 
-    private Vector3 PlaceTitle(string titleType, int x, int y, Vector3 worldStart)
+    private void PlaceTitle(string titleType, int x, int y, Vector3 worldStart)
     {
         int tileIndex = int.Parse(titleType);
         TileScript newTitle = Instantiate(titlePrefeabs[tileIndex]).GetComponent<TileScript>();
         
         newTitle.Setup(new Point(x, y), new Vector3(worldStart.x + (TitleSize * x), worldStart.y - (TitleSize * y), 0));
         
-        return newTitle.transform.position;
+        Tiles.Add(new Point(x, y), newTitle);
     }
 
     private string[] ReadLevelText()
