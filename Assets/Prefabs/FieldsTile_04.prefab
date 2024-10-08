@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9155308999864762308}
   - component: {fileID: 7039465317504878898}
+  - component: {fileID: 4984216503489176440}
   m_Layer: 0
   m_Name: FieldsTile_04
   m_TagString: Untagged
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4984216503489176440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4459306261613372616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e3e9098afced89459d5e472c0628010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
