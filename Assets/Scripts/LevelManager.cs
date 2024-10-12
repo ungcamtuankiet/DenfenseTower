@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField]
     private GameObject[] titlePrefeabs;
     
     [SerializeField]
     private CameraMovement cameraMovement;
+
+    [SerializeField]
+    private Transform map;
 
     private Point blueSpawn, redSpawn;
     [SerializeField]
@@ -26,12 +29,29 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         CreateLevel();
+
+        int a = 1;
+        int b = 2;
+
+        string aString = "1";
+        string bString = "2";
+
+        Swap<string>(ref aString, ref bString);
+        Swap<int>(ref a, ref b);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void Swap<T>(ref T a, ref T b)
+    {
+        T tmp = a;
+        a = b;
+        b = tmp;
     }
 
     private void CreateLevel()
@@ -68,9 +88,9 @@ public class LevelManager : MonoBehaviour
         int tileIndex = int.Parse(titleType);
         TileScript newTitle = Instantiate(titlePrefeabs[tileIndex]).GetComponent<TileScript>();
         
-        newTitle.Setup(new Point(x, y), new Vector3(worldStart.x + (TitleSize * x), worldStart.y - (TitleSize * y), 0));
+        newTitle.Setup(new Point(x, y), new Vector3(worldStart.x + (TitleSize * x), worldStart.y - (TitleSize * y), 0), map);
         
-        Tiles.Add(new Point(x, y), newTitle);
+        
     }
 
     private string[] ReadLevelText()
