@@ -1,29 +1,37 @@
+﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField]
-    private GameObject towerPrefab;
+    public TowerBtn ClickedBtn { get; set; }
 
-    public GameObject TowerPrefab
+    // Use this for initialization
+    void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+        HandleEscape();
+	}
+
+    public void PickTower(TowerBtn towerBtn)
     {
-        get
+        this.ClickedBtn = towerBtn;
+        Hover.Instance.Activate(towerBtn.Sprite);
+    }
+
+    public void BuyTower()
+    {
+        Hover.Instance.Deactivate();
+    }
+
+    private void HandleEscape()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            return towerPrefab;
+            Hover.Instance.Deactivate();
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 }

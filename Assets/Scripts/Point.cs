@@ -1,15 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public struct Point 
+﻿/// <summary>
+/// Struct used for indicating X and Y positions in our GameWorld
+/// </summary>
+public struct Point
 {
-   public int X {get; set;}
-   public int Y {get; set;}
+    /// <summary>
+    /// The x position
+    /// </summary>
+    public int X { get; set; }
 
-   public Point(int x, int y)
-   {
-      this.X = x;
-      this.Y = y;
-   }
+    /// <summary>
+    /// The y position
+    /// </summary>
+    public int Y { get; set; }
+
+    /// <summary>
+    /// Sets the values of the struct
+    /// </summary>
+    /// <param name="x">initial x</param>
+    /// <param name="y">initial y</param>
+    public Point(int x, int y)
+    {
+        this.X = x;
+        this.Y = y;
+    }
 }

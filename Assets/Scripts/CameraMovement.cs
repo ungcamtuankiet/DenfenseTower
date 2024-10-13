@@ -1,11 +1,13 @@
+﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
     [SerializeField]
     private float cameraSpeed = 0;
+
+    private float xMax;
+    private float yMin;
 
     // Update is called once per frame
     private void Update()
@@ -13,36 +15,41 @@ public class CameraMovement : MonoBehaviour
         GetInput();
     }
 
-    private float xMax;
-    private float yMin;
-
     private void GetInput()
     {
-        if(Input.GetKey(KeyCode.W))
+        //Camera input
+        if (Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.up * cameraSpeed * Time.deltaTime);
         }
-        if(Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(Vector3.left * cameraSpeed * Time.deltaTime);
         }
-        if(Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             transform.Translate(Vector3.down * cameraSpeed * Time.deltaTime);
         }
-        if(Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * cameraSpeed * Time.deltaTime); 
+            transform.Translate(Vector3.right * cameraSpeed * Time.deltaTime);
         }
-        
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x,0,xMax), Mathf.Clamp(transform.position.y, yMin, 0), -10);
+
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, 0, xMax), Mathf.Clamp(transform.position.y,yMin,0),-10);
     }
-    
-    public void SetLimits(Vector3 maxTile)
+
+    /// <summary>
+    /// Sets the limits
+    /// </summary>
+    /// <param name="maxtile">The max tile position</param>
+    public void SetLimits(Vector3 maxtile)
     {
-        Vector3 wp = Camera.main.ViewportToWorldPoint(new Vector3(1,0));
-        
-        xMax = maxTile.x - wp.x;
-        yMin = maxTile.y - wp.y;
+        //Transforms position 1,0 from viewPort space to world space this is the bottom right corner
+        Vector3 p = Camera.main.ViewportToWorldPoint(new Vector3(1, 0));
+
+        //Gets the world pos of the max tile
+        xMax = maxtile.x - p.x;
+        yMin = maxtile.y - p.y;
+
     }
 }
