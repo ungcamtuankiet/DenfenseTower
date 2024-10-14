@@ -19,7 +19,9 @@ public class LevelManager : Singleton<LevelManager>
     private GameObject bluePortalPrefab;
     [SerializeField]
     private GameObject redPortalPrefab;
-    
+
+    private Point mapSize;
+
     public Dictionary<Point, TileScript> Tiles {get; set;}
     public float TitleSize
     {
@@ -59,6 +61,7 @@ public class LevelManager : Singleton<LevelManager>
         Tiles = new Dictionary<Point, TileScript>();
         
         string[] mapData = ReadLevelText();
+        mapSize = new Point(mapData[0].ToCharArray().Length, mapData.Length);
 
         int mapX = mapData[0].ToCharArray().Length;
 
@@ -105,11 +108,15 @@ public class LevelManager : Singleton<LevelManager>
     private void SpawnPortals()
     {
         blueSpawn = new Point(0, 0);
-        
+
         Instantiate(bluePortalPrefab, Tiles[blueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
-        
+
         redSpawn = new Point(11, 6);
-        
+
         Instantiate(redPortalPrefab, Tiles[redSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+    }
+    public bool InBounds(Point position)
+    {
+        return position.X >= 0 && position.Y >= 0 && position.X < mapSize.X && position.Y < mapSize.Y;
     }
 }
