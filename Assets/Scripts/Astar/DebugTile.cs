@@ -40,7 +40,7 @@ public class DebugTile : MonoBehaviour
             this.f = value;
         }
     }
-
+    
     /// <summary>
     /// Property for accessing the g score
     /// </summary>
