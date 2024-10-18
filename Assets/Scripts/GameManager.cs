@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,11 +25,17 @@ public class GameManager : Singleton<GameManager>
     
     [SerializeField]
     private Text currencyTxt;
-    
+    public ObjectPool Pool { get; set; }
+
+    private void Awake()
+    {
+        Pool = GetComponent<ObjectPool>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Currency = 10;
+        Currency = 100;
     }
 
     // Update is called once per frame
@@ -63,5 +70,39 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetKeyDown(KeyCode.Escape)) {
             Hover.Instance.Deactivate();
         }
+    }
+
+    public void StartWave()
+    {
+        StartCoroutine(SpwanWave());
+    }
+
+    private IEnumerator SpwanWave()
+    {
+        LevelManager.Instance.GeneratePath();
+
+        int monsterIndex = 1;
+
+        string type = string.Empty;
+
+        switch (monsterIndex)
+        {
+            case 0:
+                type = "BlueMonster";
+                break;
+            case 1:
+                type = "RedMonster";
+                break;
+            case 2:
+                type = "GreenMonster";
+                break;
+            case 3:
+                type = "PurpleMonster";
+                break;
+        }
+
+        Monster monster = Pool.GetObject(type).GetComponent<Monster>();
+        monster.Spawn();
+        yield return new WaitForSeconds(2.5f);
     }
 }

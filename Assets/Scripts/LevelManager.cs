@@ -19,9 +19,22 @@ public class LevelManager : Singleton<LevelManager>
     private GameObject bluePortalPrefab;
     [SerializeField]
     private GameObject redPortalPrefab;
+    public Portal BluePortal { get; set; }
 
     private Point mapSize;
+    private Stack<Node> path;
 
+    public Stack<Node> Path
+    {
+        get
+        {
+            if (path == null)
+            {
+                GeneratePath();
+            }
+            return new Stack<Node>(new Stack<Node>(path));
+        }
+    }
     public Dictionary<Point, TileScript> Tiles {get; set;}
     public float TitleSize
     {
@@ -109,7 +122,9 @@ public class LevelManager : Singleton<LevelManager>
     {
         blueSpawn = new Point(0, 0);
 
-        Instantiate(bluePortalPrefab, Tiles[blueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        GameObject tmp = (GameObject)Instantiate(bluePortalPrefab, Tiles[blueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        BluePortal = tmp.GetComponent<Portal>();
+        BluePortal.name = "BluePortal";
 
         redSpawn = new Point(11, 6);
 
@@ -118,5 +133,9 @@ public class LevelManager : Singleton<LevelManager>
     public bool InBounds(Point position)
     {
         return position.X >= 0 && position.Y >= 0 && position.X < mapSize.X && position.Y < mapSize.Y;
+    }
+    public void GeneratePath()
+    {
+        path = AStar.GetPath(blueSpawn, redSpawn);
     }
 }
