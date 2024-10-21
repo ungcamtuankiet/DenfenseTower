@@ -7,6 +7,8 @@ public class TileScript : MonoBehaviour
 {
     public Point GridPosition {get; private set;}
 
+    private Tower myTower;
+
     public bool IsEmpty {get; private set;}
 
     private Color32 fullColor = new Color32(255, 118, 118, 255);
@@ -52,23 +54,26 @@ public class TileScript : MonoBehaviour
 
     private void OnMouseOver()
     {
-        
-            if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedBtn != null)
-                   {
-                        if (IsEmpty && !Debugging) 
-                         {
-                              ColorTile(emptyColor);
-                         } 
-                        if (!IsEmpty && !Debugging) 
-                         {
-                              ColorTile(fullColor);
-                         }
-                        else if (Input.GetMouseButtonDown(0))
-                         {
-                              PlaceTower();
-                         }
-                   }
 
+        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedBtn != null)
+        {
+            if (IsEmpty && !Debugging)
+            {
+                ColorTile(emptyColor);
+            }
+            if (!IsEmpty && !Debugging)
+            {
+                ColorTile(fullColor);
+            }
+            else if (Input.GetMouseButtonDown(0))
+            {
+                PlaceTower();
+            }
+        }
+        else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.ClickedBtn == null) 
+                {
+
+        }
     }
 
     private void OnMouseExit()

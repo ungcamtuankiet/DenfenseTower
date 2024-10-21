@@ -7,9 +7,14 @@ public class Hover : Singleton<Hover>
 
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
+
+    private SpriteRenderer rangedSpriteRenderer;
+
     void Start()
     {
         this.spriteRenderer = GetComponent<SpriteRenderer>();
+
+        this.rangedSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -33,14 +38,20 @@ public class Hover : Singleton<Hover>
     public void Activate(Sprite sprite)
     {
         this.spriteRenderer.sprite = sprite;
+
         spriteRenderer.enabled = true;
+
+        rangedSpriteRenderer.enabled = true;
     }
 
 
     public void Deactivate()
     {
         spriteRenderer.enabled = false;
+
         GameManager.Instance.ClickedBtn = null;
+
+        rangedSpriteRenderer.enabled = false;
     }
 }
 

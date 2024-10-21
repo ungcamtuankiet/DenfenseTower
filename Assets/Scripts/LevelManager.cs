@@ -40,6 +40,9 @@ public class LevelManager : Singleton<LevelManager>
     {
         get { return titlePrefeabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
     }
+
+    public Point BlueSpawn { get => blueSpawn; set => blueSpawn = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -122,7 +125,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         blueSpawn = new Point(0, 0);
 
-        GameObject tmp = (GameObject)Instantiate(bluePortalPrefab, Tiles[blueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
+        GameObject tmp = (GameObject)Instantiate(bluePortalPrefab, Tiles[BlueSpawn].GetComponent<TileScript>().WorldPosition, Quaternion.identity);
         BluePortal = tmp.GetComponent<Portal>();
         BluePortal.name = "BluePortal";
 
@@ -136,6 +139,6 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void GeneratePath()
     {
-        path = AStar.GetPath(blueSpawn, redSpawn);
+        path = AStar.GetPath(BlueSpawn, redSpawn);
     }
 }
