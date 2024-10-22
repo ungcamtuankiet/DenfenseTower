@@ -131,8 +131,21 @@ public class GameManager : Singleton<GameManager>
 
     public void SelectTower(Tower tower)
     {
+        if (selectedTower != null)
+        {
+            selectedTower.Select();
+        }
         selectedTower = tower;
         selectedTower.Select();
+    }
+
+    public void DeselectTower()
+    {
+        if (selectedTower !=null)
+        {
+            selectedTower.Select();
+        }
+        selectedTower = null;
     }
 
     public void StartWave()
