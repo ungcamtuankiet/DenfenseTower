@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Monster : MonoBehaviour
 {
@@ -9,26 +10,36 @@ public class Monster : MonoBehaviour
 
     private Stack<Node> path;
 
-    private Animator myAnimator;
+    protected Animator myAnimator;
+    [FormerlySerializedAs("healthStat")] [SerializeField]
+    private Stat health;
     public Point GridPosition { get; set; }
 
     private Vector3 destination;
     public bool IsActive { get; set; }
 
+    
     private void Update()
     {
         Move();
     }
-    public void Spawn()
+    public void Spawn(int health)
     {
         transform.position = LevelManager.Instance.BluePortal.transform.position;
-
-        myAnimator = GetComponent<Animator>();
-
+        
+        this.health.MaxVal = health;
+        this.health.CurrentValue = this.health.MaxVal;
+        
         StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(1, 1), false));
 
         SetPath(LevelManager.Instance.Path);
 
+    }
+
+    private void Awake()
+    {
+        myAnimator = GetComponent<Animator>();
+        health.Initialize();
     }
 
     public IEnumerator Scale(Vector3 from, Vector3 to, bool remove)
@@ -124,11 +135,30 @@ public class Monster : MonoBehaviour
         }
     }
 
-    private void Release()
+    public void Release()
     {
         IsActive = false;
         GridPosition = LevelManager.Instance.BlueSpawn;
         GameManager.Instance.Pool.ReleaseObject(gameObject);
         GameManager.Instance.RemoveMonster(this);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (IsActive)
+        {
+            health.CurrentValue -= damage;
+
+            if (health.CurrentValue <=0)
+            {
+                GameManager.Instance.Currency += 2;
+                
+                myAnimator.SetTrigger("Die");
+                
+                IsActive = false;
+
+                GetComponent<SpriteRenderer>().sortingOrder--;
+            }
+        }
     }
 }

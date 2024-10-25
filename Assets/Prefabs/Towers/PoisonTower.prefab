@@ -243,3 +243,4 @@ MonoBehaviour:
   projectileType: PoisonProjectile
   attackCooldown: 3
   projectileSpeed: 3
+  damage: 5
