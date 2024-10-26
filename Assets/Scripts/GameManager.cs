@@ -56,7 +56,7 @@ public class GameManager : Singleton<GameManager>
 
     private bool gameOver = false;
 
-    private int health = 15000;
+    private int health = 15;
 
     [SerializeField]
     private Text livesTxt;
@@ -165,8 +165,7 @@ public class GameManager : Singleton<GameManager>
         LevelManager.Instance.GeneratePath();
         for (int i = 0; i < wave; i++)
         {
-            /*int monsterIndex = Random.Range(0, 3);*/
-            int monsterIndex = 3;
+            int monsterIndex = Random.Range(0, 3);
 
 
             string type = string.Empty;
