@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -55,7 +56,7 @@ public class GameManager : Singleton<GameManager>
 
     private bool gameOver = false;
 
-    private int health = 15;
+    private int health = 15000;
 
     [SerializeField]
     private Text livesTxt;
@@ -164,7 +165,8 @@ public class GameManager : Singleton<GameManager>
         LevelManager.Instance.GeneratePath();
         for (int i = 0; i < wave; i++)
         {
-            int monsterIndex = 0;
+            /*int monsterIndex = Random.Range(0, 3);*/
+            int monsterIndex = 3;
 
 
             string type = string.Empty;
