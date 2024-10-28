@@ -73,5 +73,7 @@ class Stat
         this.MaxVal = maxVal;
         this.CurrentValue = currentVal;
     }
+    
+    public BarScript Bar { get { return bar; } }
 }
 
