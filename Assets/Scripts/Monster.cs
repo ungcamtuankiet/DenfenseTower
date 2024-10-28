@@ -9,10 +9,17 @@ public class Monster : MonoBehaviour
     private float speed;
 
     private Stack<Node> path;
+    
+    private SpriteRenderer spriteRenderer;
 
     protected Animator myAnimator;
     [FormerlySerializedAs("healthStat")] [SerializeField]
     private Stat health;
+
+    public bool Alive
+    {
+        get { return health.CurrentValue > 0; }
+    }
     public Point GridPosition { get; set; }
 
     private Vector3 destination;
@@ -39,6 +46,7 @@ public class Monster : MonoBehaviour
     private void Awake()
     {
         myAnimator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         health.Initialize();
     }
 
@@ -132,6 +140,11 @@ public class Monster : MonoBehaviour
             other.GetComponent<Portal>().Open();
 
             GameManager.Instance.Lives--;
+        }
+
+        if (other.tag == "Tile")
+        {
+            spriteRenderer.sortingOrder = other.GetComponent<TileScript>().GridPosition.Y;
         }
     }
 
