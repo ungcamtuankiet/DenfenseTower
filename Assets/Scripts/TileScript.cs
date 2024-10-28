@@ -9,7 +9,7 @@ public class TileScript : MonoBehaviour
 
     private Tower myTower;
 
-    public bool IsEmpty {get; private set;}
+    public bool IsEmpty {get; set;}
 
     private Color32 fullColor = new Color32(255, 118, 118, 255);
 
@@ -103,13 +103,15 @@ public class TileScript : MonoBehaviour
         tower.transform.SetParent(transform);
 
         this.myTower = tower.transform.GetChild(0).GetComponent<Tower>();
-
+        
+        IsEmpty = false;
+        ColorTile(Color.white);
+        
+        myTower.Price = GameManager.Instance.ClickedBtn.Price;
+        
         GameManager.Instance.BuyTower();
 
         WalkAble = false;
-
-        IsEmpty = false;
-        ColorTile(Color.white);
     }
 
     private void ColorTile(Color newColor)

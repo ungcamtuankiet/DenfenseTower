@@ -73,6 +73,12 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject gameOverMenu;
 
+    [SerializeField]
+    private GameObject upgradePanel;
+    
+    [SerializeField]
+    private Text sellText;
+
     private Tower selectedTower;
 
     private List<Monster> activeMonsters = new List<Monster>();
@@ -140,6 +146,10 @@ public class GameManager : Singleton<GameManager>
         }
         selectedTower = tower;
         selectedTower.Select();
+
+        sellText.text = "+ " + (selectedTower.Price/2).ToString();
+        
+        upgradePanel.SetActive(true);
     }
 
     public void DeselectTower()
@@ -148,6 +158,8 @@ public class GameManager : Singleton<GameManager>
         {
             selectedTower.Select();
         }
+        upgradePanel.SetActive(false);
+        
         selectedTower = null;
     }
 
@@ -227,5 +239,19 @@ public class GameManager : Singleton<GameManager>
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void SellTower()
+    {
+        if (selectedTower != null)
+        {
+            Currency += selectedTower.Price/2;
+            
+            selectedTower.GetComponentInParent<TileScript>().IsEmpty = true;
+            
+            Destroy(selectedTower.transform.parent.gameObject);
+            
+            DeselectTower();
+        }
     }
 }
