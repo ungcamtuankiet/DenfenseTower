@@ -1,12 +1,36 @@
 fileFormatVersion: 2
-guid: 17c507ae33aae8e4a99fd04a42f1c3d5
+guid: e41a5e1824b618d48b1b057f7f115345
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Healthbar_0
+  - first:
+      213: 21300002
+    second: Healthbar_1
+  - first:
+      213: 21300004
+    second: Healthbar_2
+  - first:
+      213: 21300006
+    second: Healthbar_3
+  - first:
+      213: 21300008
+    second: Healthbar_4
+  - first:
+      213: 21300010
+    second: Healthbar_5
+  - first:
+      213: 21300012
+    second: Healthbar_6
+  - first:
+      213: 21300014
+    second: Healthbar_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -30,12 +54,12 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: 1
+  textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
     filterMode: 1
-    aniso: 1
+    aniso: 16
     mipBias: 0
     wrapU: 1
     wrapV: 1
@@ -63,9 +87,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 0
+  applyGammaDecoding: 1
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -122,10 +146,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: bc340f6cbd6fa7242b7ffdb64528263a
-      internalID: 959672682
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -143,10 +167,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 4f12624fe5971594ba96186603cf2f29
-      internalID: -1054411723
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -164,10 +188,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c6d2aaef29dc58344b582973a754a294
-      internalID: -1189381312
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -185,10 +209,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 66f107657f6b8bf4997ea3cf6dfef5cf
-      internalID: -608343878
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -206,10 +230,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 89370c8e8d74c5f498088c330d456b12
-      internalID: 1076340485
+      spriteID: 82305410000000000800000000000000
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -227,10 +251,10 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 9c8f4bb1bbd1f454a8e0083b1cef79df
-      internalID: 2023367885
+      spriteID: a2305410000000000800000000000000
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -238,7 +262,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -246,12 +270,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Healthbar_0: 959672682
-      Healthbar_1: -1054411723
-      Healthbar_2: -1189381312
-      Healthbar_3: -608343878
-      Healthbar_4: 1076340485
-      Healthbar_5: 2023367885
+      Healthbar_0: 21300000
+      Healthbar_1: 21300002
+      Healthbar_2: 21300004
+      Healthbar_3: 21300006
+      Healthbar_4: 21300008
+      Healthbar_5: 21300010
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
